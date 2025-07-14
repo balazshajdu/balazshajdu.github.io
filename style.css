@@ -2,21 +2,15 @@ body {
 	margin: 40px auto;
 	max-width: 650px;
 	line-height: 1.6;
+	font-family: Arial;
 	font-size: 18px;
-	color: #444;
 	padding: 0 10px
-	background-color: #eeeeee;
-}
-
-h1,h2,h3 {
-	line-height: 1.2
+	background-color: #121212;
 }
 
 #decryptedTextOutput {
 	white-space: pre-wrap;
-	font-family: monospace;
-	border: 1px solid #ccc;
-	padding: 10px;
+	opacity: 0.87;
 }
 
 #passwordInput {
