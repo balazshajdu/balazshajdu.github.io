@@ -18,3 +18,7 @@ h1,h2,h3 {
 	border: 1px solid #ccc;
 	padding: 10px;
 }
+
+#passwordInput {
+	display: none;
+}
