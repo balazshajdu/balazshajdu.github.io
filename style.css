@@ -1,16 +1,17 @@
 body {
 	margin: auto;
-	max-width: 550px;
-	line-height: 1.5;
+	max-width: 640px;
+	line-height: 1.4;
 	font-family: Arial;
-	font-size: 15px;
+	font-size: 14px;
+	font-weight: bold;
 	color: white;
-	background-color: #151515;
+	background-color: #141414;
 }
 
 #decryptedTextOutput {
 	white-space: pre-wrap;
-	opacity: 0.5;
+	opacity: 0.6;
 }
 
 #passwordInput {
