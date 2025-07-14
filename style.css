@@ -11,6 +11,7 @@ body {
 
 #decryptedTextOutput {
 	white-space: pre-wrap;
+	padding: 14px;
 	opacity: 0.6;
 }
 
