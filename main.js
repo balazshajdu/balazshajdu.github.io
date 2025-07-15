@@ -91,6 +91,4 @@ async function decryptfile() {
 	const decryptedText = decoder.decode(plaintextbytes);
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
-
-	storeData("text", decryptedText);
 }
