@@ -39,23 +39,26 @@ function getStoredData(key) {
 }
 
 async function decryptfile() {
+
+	if(getStoredData("text")) {
+		const outputElement = document.getElementById('decryptedTextOutput');
+		outputElement.textContent = getStoredData("text");
+		return;
+	}
+
 	var cipherbytes=await readfile(file);
 	var cipherbytes=new Uint8Array(cipherbytes);
 
 	var pbkdf2iterations=10000;
 
 	var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
-	console.log("passphrasebytes: " + passphrasebytes);
 
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
-	var passphrasekey=await window.crypto.subtle.importKey('raw', passphrasebytes, {name: 'PBKDF2'}, true, ['deriveBits'])	// has set false to true
+	var passphrasekey=await window.crypto.subtle.importKey('raw', passphrasebytes, {name: 'PBKDF2'}, false, ['deriveBits'])
 	.catch(function(err){
 		console.error(err);
 	});
-	console.log("passphrasekey: " + passphrasekey);
-	var exportedKey = await window.crypto.subtle.exportKey('raw', passphrasekey);
-	console.log("exportedKey: " + exportedKey);
 
 	var pbkdf2bytes=await window.crypto.subtle.deriveBits({"name": 'PBKDF2', "salt": pbkdf2salt, "iterations": pbkdf2iterations, "hash": 'SHA-256'}, passphrasekey, 384)		
 	.catch(function(err){
@@ -67,12 +70,6 @@ async function decryptfile() {
 	keybytes=pbkdf2bytes.slice(0,32);
 	ivbytes=pbkdf2bytes.slice(32);
 	cipherbytes=cipherbytes.slice(16);
-
-	/*if(getStoredData("password")) {
-		key=getStoredData("password");
-	} else {
-		
-	}*/
 
 	var key=await window.crypto.subtle.importKey('raw', keybytes, {name: 'AES-CBC', length: 256}, false, ['decrypt']) 
 	.catch(function(err){
@@ -95,7 +92,5 @@ async function decryptfile() {
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
 
-	storeData("bytes", passphrasebytes);
-	storeData("key", passphrasekey);
-	storeData("exkey", exportedKey);
+	storeData("text", decryptedText);
 }
