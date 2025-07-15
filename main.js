@@ -32,7 +32,7 @@ function readfile(url) {
   	});
 }
 
-function displayLatest() {
+async function displayLatest() {
 	var showIt = getStoredData("showLatest");
 	if(showIt) {
 		var latest = await readfile(latestFile);
