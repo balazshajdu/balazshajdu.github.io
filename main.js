@@ -41,11 +41,11 @@ function getStoredData(key) {
 async function decryptfile() {
 	var cipherbytes=await readfile(file);
 	var cipherbytes=new Uint8Array(cipherbytes);
-	
+
 	var pbkdf2iterations=10000;
-	
+
 	var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
-	
+
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
 	var passphrasekey=await window.crypto.subtle.importKey('raw', passphrasebytes, {name: 'PBKDF2'}, false, ['deriveBits'])
@@ -59,21 +59,21 @@ async function decryptfile() {
 	});
 
 	pbkdf2bytes=new Uint8Array(pbkdf2bytes);
-	
+
 	keybytes=pbkdf2bytes.slice(0,32);
 	ivbytes=pbkdf2bytes.slice(32);
 	cipherbytes=cipherbytes.slice(16);
 
-	var key;
-
-	if(getStoredData("password")) {
+	/*if(getStoredData("password")) {
 		key=getStoredData("password");
 	} else {
-		key=await window.crypto.subtle.importKey('raw', keybytes, {name: 'AES-CBC', length: 256}, false, ['decrypt']) 
-		.catch(function(err){
-			console.error(err);
-		});
-	}
+		
+	}*/
+
+	var key=await window.crypto.subtle.importKey('raw', keybytes, {name: 'AES-CBC', length: 256}, false, ['decrypt']) 
+	.catch(function(err){
+		console.error(err);
+	});
 
 	var plaintextbytes=await window.crypto.subtle.decrypt({name: "AES-CBC", iv: ivbytes}, key, cipherbytes)
 	.catch(function(err){
@@ -91,5 +91,5 @@ async function decryptfile() {
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
 
-	storeData("password", key);
+	//storeData("password", key);
 }
