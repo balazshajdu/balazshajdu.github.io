@@ -1,7 +1,6 @@
 const file='text.txt.enc';
 
 var input = document.getElementById("passwordInput");
-
 input.addEventListener("keypress", function(event) {
 	if (event.key === "Enter") {
 		decryptfile();
