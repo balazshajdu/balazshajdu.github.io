@@ -38,16 +38,6 @@ function getStoredData(key) {
 	}
 }
 
-function saveKeyInLocalStorage(keyName, aesKey){
-	/*var exportPromise = crypto.subtle.exportKey('raw',aesKey);
-	exportPromise.then(function(aesKey_RAW){ 
-		localStorage.setItem(keyName + 'key' , aesKey_RAW);
-		console.log("saved.");
-	});*/
-	window.crypto.subtle.exportKey("jwk", aesKey)
-	.then(e=>localStorage.setItem("webkey",JSON.stringify(e)));
-}
-
 async function decryptfile() {
 	var cipherbytes=await readfile(file);
 	var cipherbytes=new Uint8Array(cipherbytes);
@@ -55,6 +45,7 @@ async function decryptfile() {
 	var pbkdf2iterations=10000;
 
 	var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
+	console.log(passphrasebytes);
 
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
@@ -101,7 +92,5 @@ async function decryptfile() {
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
 
-	saveKeyInLocalStorage("password", key);
-	
-	//storeData("password", key);
+	storeData("password", passphrasebytes);
 }
