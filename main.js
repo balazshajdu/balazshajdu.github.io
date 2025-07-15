@@ -2,6 +2,10 @@ const file='content.enc';
 const latestFile='latest.txt';
 var showLatest = false;
 
+document.addEventListener("DOMContentLoaded", function() {
+	displayLatest();
+});
+
 var input = document.getElementById("passwordInput");
 input.addEventListener("keypress", function(event) {
 	if (event.key === "Enter") {
