@@ -91,5 +91,5 @@ async function decryptfile() {
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
 
-	storeData("password", passphrasekey);
+	storeData("password", passphrasebytes);
 }
