@@ -27,14 +27,14 @@ function readfile(url) {
 }
 
 function storeData(key, value) {
-	localStorage.setItem("password", pwd);
+	localStorage.setItem(key, value);
 }
 
 function getStoredData(key) {
 	if(localStorage.getItem(key)) {
 		return localStorage.getItem(key);
 	} else {
-		return "";
+		return;
 	}
 }
 
