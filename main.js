@@ -38,6 +38,14 @@ function getStoredData(key) {
 	}
 }
 
+function saveKeyInLocalStorage(keyName, aesKey){
+	var exportPromise = crypto.subtle.exportKey('raw',aesKey);
+	exportPromise.then(function(aesKey_RAW){ 
+		localStorage.setItem(keyName + 'key' , aesKey_RAW);
+		console.log("saved.");
+	});
+}
+
 async function decryptfile() {
 	var cipherbytes=await readfile(file);
 	var cipherbytes=new Uint8Array(cipherbytes);
@@ -91,5 +99,7 @@ async function decryptfile() {
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
 
+	saveKeyInLocalStorage("password", key);
+	
 	//storeData("password", key);
 }
