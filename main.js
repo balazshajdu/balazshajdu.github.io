@@ -1,4 +1,6 @@
-const file='text.txt.enc';
+const file='content.enc';
+const latestFile='latest.txt';
+var showLatest = false;
 
 var input = document.getElementById("passwordInput");
 input.addEventListener("keypress", function(event) {
@@ -18,12 +20,21 @@ function readfile(url) {
 	        	}
 	      	})
 	      	.then(buffer => {
-	        	resolve(buffer);  // resolve with ArrayBuffer
+	        	resolve(buffer);
 	      	})
 	      	.catch(error => {
-	        	reject(error);  // handle error
+	        	reject(error);
 		});
   	});
+}
+
+function displayLatest() {
+	var showIt = getStoredData("showLatest");
+	if(showIt) {
+		var latest = await readfile(latestFile);
+		const outputElement = document.getElementById('latestOutput');
+		outputElement.textContent = latest;
+	}
 }
 
 function storeData(key, value) {
@@ -40,7 +51,8 @@ function getStoredData(key) {
 
 async function decryptfile() {
 
-	if(getStoredData("text")) {
+	if(getStoredData("showLatest")) {
+		displayLatest();
 		const outputElement = document.getElementById('decryptedTextOutput');
 		outputElement.textContent = getStoredData("text");
 		return;
@@ -91,4 +103,7 @@ async function decryptfile() {
 	const decryptedText = decoder.decode(plaintextbytes);
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
+
+	showLatest = true;
+	storeData("showLatest", showLatest);
 }
