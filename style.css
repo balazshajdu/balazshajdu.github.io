@@ -9,6 +9,13 @@ body {
 	background-color: #141414;
 }
 
+#latestOutput {
+	white-space: pre-wrap;
+	padding: 14px;
+	color: yellow;
+	opacity: 0.6;
+}
+
 #decryptedTextOutput {
 	white-space: pre-wrap;
 	padding: 14px;
