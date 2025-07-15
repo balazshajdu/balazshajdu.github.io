@@ -26,13 +26,32 @@ function readfile(url) {
   	});
 }
 
+function storeData(key, value) {
+	localStorage.setItem("password", pwd);
+}
+
+function getStoredData(key) {
+	if(localStorage.getItem(key)) {
+		return localStorage.getItem(key);
+	} else {
+		return "";
+	}
+}
 
 async function decryptfile() {
 	var cipherbytes=await readfile(file);
 	var cipherbytes=new Uint8Array(cipherbytes);
-
+	
 	var pbkdf2iterations=10000;
-	var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
+	
+	var passphrasebytes;
+	
+	if(getStoredData("password")) {
+		passphrasebytes=getStoredData("password");
+	} else {
+		passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
+	}
+	
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
 	var passphrasekey=await window.crypto.subtle.importKey('raw', passphrasebytes, {name: 'PBKDF2'}, false, ['deriveBits'])
@@ -71,4 +90,6 @@ async function decryptfile() {
 	const decryptedText = decoder.decode(plaintextbytes);
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
+
+	storeData("password", passphrasekey);
 }
