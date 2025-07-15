@@ -49,7 +49,7 @@ async function decryptfile() {
 
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
-	var passphrasekey=await window.crypto.subtle.importKey('raw', passphrasebytes, {name: 'PBKDF2'}, false, ['deriveBits'])
+	var passphrasekey=await window.crypto.subtle.importKey('raw', passphrasebytes, {name: 'PBKDF2'}, true, ['deriveBits'])	// has set false to true
 	.catch(function(err){
 		console.error(err);
 	});
