@@ -39,11 +39,13 @@ function getStoredData(key) {
 }
 
 function saveKeyInLocalStorage(keyName, aesKey){
-	var exportPromise = crypto.subtle.exportKey('raw',aesKey);
+	/*var exportPromise = crypto.subtle.exportKey('raw',aesKey);
 	exportPromise.then(function(aesKey_RAW){ 
 		localStorage.setItem(keyName + 'key' , aesKey_RAW);
 		console.log("saved.");
-	});
+	});*/
+	window.crypto.subtle.exportKey("jwk", aesKey)
+	.then(e=>localStorage.setItem("webkey",JSON.stringify(e)));
 }
 
 async function decryptfile() {
