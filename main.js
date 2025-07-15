@@ -45,7 +45,7 @@ async function decryptfile() {
 	var pbkdf2iterations=10000;
 
 	var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
-	console.log(passphrasebytes);
+	console.log("passphrasebytes: " + passphrasebytes);
 
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
@@ -53,6 +53,9 @@ async function decryptfile() {
 	.catch(function(err){
 		console.error(err);
 	});
+	console.log("passphrasekey: " + passphrasekey);
+	var exportedKey = await window.crypto.subtle.exportKey('raw', passphrasekey);
+	console.log("exportedKey: " + exportedKey);
 
 	var pbkdf2bytes=await window.crypto.subtle.deriveBits({"name": 'PBKDF2', "salt": pbkdf2salt, "iterations": pbkdf2iterations, "hash": 'SHA-256'}, passphrasekey, 384)		
 	.catch(function(err){
@@ -94,4 +97,5 @@ async function decryptfile() {
 
 	storeData("bytes", passphrasebytes);
 	storeData("key", passphrasekey);
+	storeData("exkey", exportedKey);
 }
