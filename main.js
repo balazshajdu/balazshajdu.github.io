@@ -1,11 +1,12 @@
-const file='content.enc';
-const latestFile='latest.txt';
+const file='content.enc';	// Path to the encrypted file which contains the content
+const latestFile='latest.txt';	// Path to the "latest" plain text file which contains the date and time of the last change of the content
 var showLatest = false;
 
 document.addEventListener("DOMContentLoaded", function() {
 	displayLatest();
 });
 
+// Start decryption by pressing enter (instead of a button)
 var input = document.getElementById("passwordInput");
 input.addEventListener("keypress", function(event) {
 	if (event.key === "Enter") {
@@ -13,6 +14,7 @@ input.addEventListener("keypress", function(event) {
 	}
 });
 
+// Reads the file of the given path
 function readfile(url) {
 	return new Promise((resolve, reject) => {
 	    	fetch(url)
@@ -36,8 +38,10 @@ async function displayLatest() {
 	var showIt = getStoredData("showLatest");
 	if(showIt) {
 		var latest = await readfile(latestFile);
+		const decoder = new TextDecoder();
+		const decodedLatest = decoder.decode(latest);
 		const outputElement = document.getElementById('latestOutput');
-		outputElement.textContent = latest;
+		outputElement.textContent = decodedLatest;
 	}
 }
 
