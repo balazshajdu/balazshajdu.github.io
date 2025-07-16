@@ -59,12 +59,12 @@ function getStoredData(key) {
 
 async function decryptfile() {
 
-	if(getStoredData("showLatest")) {
+	/*if(getStoredData("showLatest")) {
 		displayLatest();
 		const outputElement = document.getElementById('decryptedTextOutput');
 		outputElement.textContent = getStoredData("text");
 		return;
-	}
+	}*/
 
 	var cipherbytes=await readfile(file);
 	var cipherbytes=new Uint8Array(cipherbytes);
