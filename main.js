@@ -1,18 +1,28 @@
 const file='content.enc';	// Path to the encrypted file which contains the content
 const latestFile='latest.txt';	// Path to the "latest" plain text file which contains the date and time of the last change of the content
 var showLatest = false;
+var inputString = "";  // Initialize the input string
 
 document.addEventListener("DOMContentLoaded", function() {
 	displayLatest();
 });
 
-// Start decryption by pressing enter (instead of a button)
-var input = document.getElementById("passwordInput");
-input.addEventListener("keypress", function(event) {
-	if (event.key === "Enter") {
-		decryptfile();
-	}
-});
+function listenForInput() {
+	var input = document.getElementById("passwordInput");
+
+	// Start decryption by pressing enter (instead of a button)
+	input.addEventListener("keypress", function(event) {
+		if (event.key === "Enter") {
+			decryptfile();
+		}
+
+		// Append the typed character to the input string (skip Enter, Shift, etc.)
+		if (event.key.length === 1) {	// Only add printable characters
+			inputString += event.key;
+			console.log(inputString);
+		}
+	});
+}
 
 // Reads the file of the given path
 function readfile(url) {
@@ -59,19 +69,13 @@ function getStoredData(key) {
 
 async function decryptfile() {
 
-	/*if(getStoredData("showLatest")) {
-		displayLatest();
-		const outputElement = document.getElementById('decryptedTextOutput');
-		outputElement.textContent = getStoredData("text");
-		return;
-	}*/
-
 	var cipherbytes=await readfile(file);
 	var cipherbytes=new Uint8Array(cipherbytes);
 
 	var pbkdf2iterations=10000;
 
-	var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
+	//var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
+	var passphrasebytes=new TextEncoder("utf-8").encode(inputString.value);
 
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
