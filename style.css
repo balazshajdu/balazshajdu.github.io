@@ -23,5 +23,6 @@ body {
 }
 
 #passwordInput {
+	padding: 14px;
 	opacity: 0;
 }
