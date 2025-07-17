@@ -46,12 +46,12 @@ async function displayLatest() {
 }
 
 function storeData(key, value) {
-	localStorage.setItem(key, value);
+	sessionStorage.setItem(key, value);
 }
 
 function getStoredData(key) {
-	if(localStorage.getItem(key)) {
-		return localStorage.getItem(key);
+	if(sessionStorage.getItem(key)) {
+		return sessionStorage.getItem(key);
 	} else {
 		return null;
 	}
