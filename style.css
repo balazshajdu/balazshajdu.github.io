@@ -27,6 +27,6 @@ body {
 }
 
 #passwordInput {
-	visibility: collapse;
+	visibility: hidden;
 	opacity: 0;
 }
