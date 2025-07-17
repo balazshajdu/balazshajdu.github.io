@@ -72,11 +72,8 @@ async function decryptfile() {
 
 	//var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
 	//console.log(passphrasebytes);
-	var passphrasebytesNEW=new TextEncoder("utf-8").encode(inputString);
-	console.log(passphrasebytesNEW);
-	var passphrasebytesALPHA=new TextEncoder("utf-8").encode(inputString.value);
-	console.log(passphrasebytesALPHA);
-	//console.log(passwordInput.value);
+	var passphrasebytes=new TextEncoder("utf-8").encode(inputString);
+	console.log(passphrasebytes);
 	
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
