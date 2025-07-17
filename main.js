@@ -1,22 +1,21 @@
 const file='content.enc';	// Path to the encrypted file which contains the content
 const latestFile='latest.txt';	// Path to the "latest" plain text file which contains the date and time of the last change of the content
-var showLatest = false;
-var inputString = "";  // Initialize the input string
+var showLatest = false;	// Boolean for showing or not showing the "latest" info
+var inputString = "";	// Initialize the input string
 
 document.addEventListener("DOMContentLoaded", function() {
 	displayLatest();
 });
 
-// Start decryption by pressing enter (instead of a button)
+// Listen to keypresses (instead of an input field) and start decryption by pressing enter (instead of a button)
 document.addEventListener("keypress", function(event) {
 	if (event.key === "Enter") {
 		decryptfile();
 	}
 
-	// Append the typed character to the input string (skip Enter, Shift, etc.)
-	if (event.key.length === 1) {	// Only add printable characters
+	// Append the typed character to the input string (Only add printable characters, skip Enter, Shift, etc.)
+	if (event.key.length === 1) {
 		inputString += event.key;
-		console.log(inputString);
 	}
 });
 
@@ -41,8 +40,7 @@ function readfile(url) {
 }
 
 async function displayLatest() {
-	var showIt = getStoredData("showLatest");
-	if(showIt) {
+	if(getStoredData("showLatest")) {
 		var latest = await readfile(latestFile);
 		const decoder = new TextDecoder();
 		const decodedLatest = decoder.decode(latest);
@@ -51,10 +49,12 @@ async function displayLatest() {
 	}
 }
 
+// Store a key and value pair in session storage
 function storeData(key, value) {
 	sessionStorage.setItem(key, value);
 }
 
+// Get the value of the given key from session storage
 function getStoredData(key) {
 	if(sessionStorage.getItem(key)) {
 		return sessionStorage.getItem(key);
@@ -63,6 +63,7 @@ function getStoredData(key) {
 	}
 }
 
+// Decryption of the content file
 async function decryptfile() {
 
 	var cipherbytes=await readfile(file);
@@ -70,10 +71,7 @@ async function decryptfile() {
 
 	var pbkdf2iterations=10000;
 
-	//var passphrasebytes=new TextEncoder("utf-8").encode(passwordInput.value);
-	//console.log(passphrasebytes);
 	var passphrasebytes=new TextEncoder("utf-8").encode(inputString);
-	console.log(passphrasebytes);
 	
 	var pbkdf2salt=cipherbytes.slice(8,16);
 
