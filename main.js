@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function listenForInput() {
-	var input = document.getElementById("passwordInput");
+	//var input = document.getElementById("passwordInput");
 
 	// Start decryption by pressing enter (instead of a button)
-	input.addEventListener("keypress", function(event) {
+	document.addEventListener("keypress", function(event) {
 		if (event.key === "Enter") {
 			decryptfile();
 		}
