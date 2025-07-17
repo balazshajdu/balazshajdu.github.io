@@ -7,22 +7,18 @@ document.addEventListener("DOMContentLoaded", function() {
 	displayLatest();
 });
 
-function listenForInput() {
-	//var input = document.getElementById("passwordInput");
+// Start decryption by pressing enter (instead of a button)
+document.addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+		decryptfile();
+	}
 
-	// Start decryption by pressing enter (instead of a button)
-	document.addEventListener("keypress", function(event) {
-		if (event.key === "Enter") {
-			decryptfile();
-		}
-
-		// Append the typed character to the input string (skip Enter, Shift, etc.)
-		if (event.key.length === 1) {	// Only add printable characters
-			inputString += event.key;
-			console.log(inputString);
-		}
-	});
-}
+	// Append the typed character to the input string (skip Enter, Shift, etc.)
+	if (event.key.length === 1) {	// Only add printable characters
+		inputString += event.key;
+		console.log(inputString);
+	}
+});
 
 // Reads the file of the given path
 function readfile(url) {
