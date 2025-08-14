@@ -4,10 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with some changes for personal preference.
 
-## [DEV 0.0.3 (to do)] - 2025.08.
+## [DEV 0.0.4 (to do)] - 2025.08.
 
 ### To add / change / remove / fix / security
 - Based on results of testing the TEST 0.0.2 (copy of DEV 0.0.2) in PROD environment with dummy content by an outside tester.
+
+## [DEV 0.0.3 (doing)] - 2025.08.
+
+### To add
+- Header with logo, title, date of last modification.
+
+### To change
+- Move date and time info of latest modification from content area to header.
 
 ## [DEV 0.0.2 (unreleased)] - 2025.07.17.
 
