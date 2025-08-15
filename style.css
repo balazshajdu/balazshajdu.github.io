@@ -7,7 +7,7 @@ body {
 	max-width: 640px;
 	line-height: 1.4;
 	font-family: Arial;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: bold;
 	color: white;
 	background-color: #141414;
@@ -36,12 +36,12 @@ body {
 }
 
 #title {
-    font-size: 24px;
+    font-size: 20px;
 	opacity: 0.7;
 }
 
 #description {
-	font-size: 14px;
+	font-size: 12px;
     margin-top: 5px;
 	opacity: 0.6;
 }
