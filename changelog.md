@@ -12,10 +12,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ## [DEV 0.0.3 (doing)] - 2025.08.
 
 ### To add
-- Header with logo, title, date of last modification.
+- Header with logo, title, description.
 
 ### To change
 - Move date and time info of latest modification from content area to header.
+- Make the content accessible on mobile.
 
 ## [DEV 0.0.2 (unreleased)] - 2025.07.17.
 
