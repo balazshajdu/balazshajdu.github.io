@@ -39,6 +39,12 @@ function readfile(url) {
   	});
 }
 
+// Display the footer
+function displayFooter() {
+    const footer = document.getElementById('footer');
+    footer.style.display = 'flex';
+}
+
 async function displayLatest() {
 	if(getStoredData("showLatest")) {
 		var latest = await readfile(latestFile);
@@ -111,6 +117,8 @@ async function decryptfile() {
 	const decryptedText = decoder.decode(plaintextbytes);
 	const outputElement = document.getElementById('decryptedTextOutput');
 	outputElement.textContent = decryptedText;
+
+	displayFooter();
 
 	showLatest = true;
 	storeData("showLatest", showLatest);
