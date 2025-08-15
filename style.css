@@ -17,8 +17,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 30px;
-    background-color: #333333;
+	padding-left: 30px;
+	padding-right: 30px;
+    background-color: #282828;
 }
 
 #logo {
@@ -36,7 +37,7 @@ body {
 
 #title {
     font-size: 24px;
-	opacity: 0.8;
+	opacity: 0.7;
 }
 
 #description {
