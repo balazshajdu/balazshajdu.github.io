@@ -104,7 +104,7 @@ async function decryptfile() {
 
 	var plaintextbytes=await window.crypto.subtle.decrypt({name: "AES-CBC", iv: ivbytes}, key, cipherbytes)
 	.catch(function(err){
-		console.error(err);
+		console.error(err + "Wrong password fool!");
 	});
 
 	if(!plaintextbytes) {
